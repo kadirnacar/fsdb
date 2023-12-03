@@ -1,4 +1,4 @@
-# Proje
+# Project
 
     "fastify": "~4.13.0",
     "react": "18.2.0",

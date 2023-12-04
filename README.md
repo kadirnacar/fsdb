@@ -6,7 +6,8 @@
     "nx": "17.1.3",
     "typescript": "~5.2.2",
     "vite": "~4.3.9",
-    "node": "v18.18.2"
+    "node": "v18.18.2",
+    "primereact": "^10.2.1",
 
 
 ## Init

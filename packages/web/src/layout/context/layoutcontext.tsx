@@ -1,0 +1,89 @@
+import { createContext, useEffect, useState } from 'react';
+import {
+  ChildContainerProps,
+  LayoutConfig,
+  LayoutContextProps,
+  LayoutState,
+} from '../../types/types';
+import { DataService } from '../../services/DataService';
+export const LayoutContext = createContext({} as LayoutContextProps);
+
+export const LayoutProvider = ({
+  children,
+  initialLayout,
+}: ChildContainerProps) => {
+  const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>(
+    initialLayout || {
+      id: 1,
+      ripple: false,
+      inputStyle: 'outlined',
+      menuMode: 'static',
+      colorScheme: 'dark',
+      theme: 'arya-orange',
+      scale: 12,
+    }
+  );
+
+  useEffect(() => {
+    DataService.update<any>('Layout', layoutConfig);
+    // SetLayout(layoutConfig);
+  }, [layoutConfig]);
+
+  const [layoutState, setLayoutState] = useState<LayoutState>({
+    staticMenuDesktopInactive: false,
+    overlayMenuActive: false,
+    profileSidebarVisible: false,
+    configSidebarVisible: false,
+    staticMenuMobileActive: false,
+    menuHoverActive: false,
+  });
+
+  const onMenuToggle = () => {
+    if (isOverlay()) {
+      setLayoutState((prevLayoutState) => ({
+        ...prevLayoutState,
+        overlayMenuActive: !prevLayoutState.overlayMenuActive,
+      }));
+    }
+
+    if (isDesktop()) {
+      setLayoutState((prevLayoutState) => ({
+        ...prevLayoutState,
+        staticMenuDesktopInactive: !prevLayoutState.staticMenuDesktopInactive,
+      }));
+    } else {
+      setLayoutState((prevLayoutState) => ({
+        ...prevLayoutState,
+        staticMenuMobileActive: !prevLayoutState.staticMenuMobileActive,
+      }));
+    }
+  };
+
+  const showProfileSidebar = () => {
+    setLayoutState((prevLayoutState) => ({
+      ...prevLayoutState,
+      profileSidebarVisible: !prevLayoutState.profileSidebarVisible,
+    }));
+  };
+
+  const isOverlay = () => {
+    return layoutConfig.menuMode === 'overlay';
+  };
+
+  const isDesktop = () => {
+    return window.innerWidth > 991;
+  };
+
+  const value: LayoutContextProps = {
+    layoutConfig,
+    setLayoutConfig,
+    layoutState,
+    setLayoutState,
+    onMenuToggle,
+    showProfileSidebar,
+  };
+
+  return (
+    <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>
+  );
+};

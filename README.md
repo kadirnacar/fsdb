@@ -39,10 +39,31 @@ npm run build
 ## Create nx workspace
 
 ```
+# Crerate new workspace. Run and follow instructions. 
+# - Workspace name.
+# - Select stack. "None"
+# - Select type. "Integrated Monorepo"
+# - Using cache. "No"
 npx create-nx-workspace@latest
-npm i --save-dev @nx/node
-npm i --save-dev @nx/react
+
+# Install node and react
+npm i --save-dev @nx/node @nx/react
+
+# For production build. Check packages/web/vite.config.js
 npm install --save-dev javascript-obfuscator
+
+# Create server application
+# - Node app name. "server"
+# - Select framework. "fastify"
+# - Select type. "Derived"
 nx g @nx/node:app --directory=packages
+
+# Create web application
+# - Node app name. "web"
+# - Select stylesheet. "SASS"
+# - React router. "y"
+# - Select E2E. "none"
+# - Select bundler. "vite"
+# - Select type. "Derived"
 nx g @nx/react:app --directory=packages
 ```

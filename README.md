@@ -52,13 +52,13 @@ npm i --save-dev @nx/node @nx/react
 # For production build. Check packages/web/vite.config.js
 npm install --save-dev javascript-obfuscator
 
-# Create server application
+# Create server application. Run and follow instructions. 
 # - Node app name. "server"
 # - Select framework. "fastify"
 # - Select type. "Derived"
 nx g @nx/node:app --directory=packages
 
-# Create web application
+# Create web application. Run and follow instructions. 
 # - Node app name. "web"
 # - Select stylesheet. "SASS"
 # - React router. "y"

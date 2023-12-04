@@ -74,7 +74,7 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
       >
         <i className="pi pi-bars" />
       </button>
-      {router.pathname.includes('admin') ? (
+     
         <>
           <button
             ref={topbarmenubuttonRef}
@@ -106,7 +106,6 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
             </div>
           </div>
         </>
-      ) : null}
     </div>
   );
 });

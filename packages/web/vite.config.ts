@@ -1,8 +1,8 @@
 /// <reference types='vitest' />
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
-import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import obfuscator from './vite_obfuscate_plugin';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/web',
@@ -17,11 +17,15 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths(), obfuscator(), splitVendorChunkPlugin()],
+  plugins: [
+
+    viteTsConfigPaths({
+      root: '../../',
+    }),
+    react(), nxViteTsPaths()/* , obfuscator(), splitVendorChunkPlugin() */],
 
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
   // },
-
 });

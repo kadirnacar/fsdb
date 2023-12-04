@@ -36,7 +36,7 @@ npm run build
 ```
 
 
-## Create nx workspace
+## Create project story
 
 ```
 # Crerate new workspace. Run and follow instructions. 

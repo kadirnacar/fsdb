@@ -1,66 +1,88 @@
-/* eslint-disable @next/next/no-img-element */
-
-import { useContext, useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { DataService } from '../services/DataService';
 import { AppMenuItem } from '../types/types';
 import AppMenuitem from './AppMenuitem';
-import { LayoutContext } from './context/layoutcontext';
 import { MenuProvider } from './context/menucontext';
 
 const AppMenu = () => {
-  const { layoutConfig } = useContext(LayoutContext);
-  const [categorys, setCategorys] = useState<any[]>([] as any[]);
-  const [menuItems, setMenuItems] = useState<AppMenuItem[]>([] as any[]);
-  const router = useLocation();
-  const params = useParams();
+  const model: AppMenuItem[] = [
+    {
+      label: 'Home',
+      items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }],
+    },
+    {
+      label: 'UI Components',
+      items: [
+        { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },
+        { label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/uikit/input' },
+        { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', to: '/uikit/floatlabel' },
+        { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', to: '/uikit/invalidstate' },
+        { label: 'Button', icon: 'pi pi-fw pi-mobile', to: '/uikit/button', class: 'rotated-icon' },
+        { label: 'Table', icon: 'pi pi-fw pi-table', to: '/uikit/table' },
+        { label: 'List', icon: 'pi pi-fw pi-list', to: '/uikit/list' },
+        { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: '/uikit/tree' },
+        { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },
+        { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/uikit/overlay' },
+        { label: 'Media', icon: 'pi pi-fw pi-image', to: '/uikit/media' },
+        { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu', preventExact: true },
+        { label: 'Message', icon: 'pi pi-fw pi-comment', to: '/uikit/message' },
+        { label: 'File', icon: 'pi pi-fw pi-file', to: '/uikit/file' },
+        { label: 'Misc', icon: 'pi pi-fw pi-circle', to: '/uikit/misc' },
+      ],
+    },
 
-  const getCategoryTree = (cat: any, data: any[]) => {
-    // const itms = data
-    //   .filter((x) => x.parentId == cat.id)
-    //   .map((x) => getCategoryTree(x, data));
-    return {
-      to: '/menu/' + cat.id,
-      label: cat.label,
-      // items: itms.length > 0 ? itms : null,
-    };
-  };
-  useEffect(() => {
-    DataService.getList<any>('Category').then((data) => {
-      const mnItems: any[] = data.value
-        ? data.value
-            .filter((x) => x.parentId == '')
-            .sort((a, b) => {
-              if (a.index < b.index) return -1;
-              else if (a.index > b.index) return 1;
-              return 0;
-            })
-            .map((x, i) => {
-              return getCategoryTree(x, data.value);
-            })
-        : [];
-      console.log('router', router, params);
-      setMenuItems(
-        [
-          {
-            label: 'Menu',
-            items: mnItems,
-          } as any,
-        ].concat({
-          label: 'Ayarlar',
-          items: [
-          ],
-        })
-      );
-    });
-  }, []);
+    {
+      label: 'Auth',
+      icon: 'pi pi-fw pi-user',
+      items: [
+        {
+          label: 'Login',
+          icon: 'pi pi-fw pi-sign-in',
+          to: '/login',
+        },
+        {
+          label: 'Error',
+          icon: 'pi pi-fw pi-times-circle',
+          to: '/error',
+        },
+        {
+          label: 'Access Denied',
+          icon: 'pi pi-fw pi-lock',
+          to: '/access',
+        },
+      ],
+    },
+    {
+      label: 'Pages',
+      items: [
+        {
+          label: 'Landing',
+          icon: 'pi pi-fw pi-globe',
+          to: '/landing',
+        },
+        {
+          label: 'Crud',
+          icon: 'pi pi-fw pi-pencil',
+          to: '/crud',
+        },
+        {
+          label: 'Not Found',
+          icon: 'pi pi-fw pi-exclamation-circle',
+          to: '/notfound',
+        },
+        {
+          label: 'Empty',
+          icon: 'pi pi-fw pi-circle-off',
+          to: '/empty',
+        },
+      ],
+    },
+  ];
 
   return (
     <MenuProvider>
       <ul className="layout-menu">
-        {menuItems.map((item, i) => {
+        {model.map((item, i) => {
           return !item?.seperator ? (
-            <AppMenuitem item={item} root={true} showRoot={false} index={i} key={item.label} />
+            <AppMenuitem item={item} root={true} index={i} key={item.label} />
           ) : (
             <li className="menu-separator"></li>
           );

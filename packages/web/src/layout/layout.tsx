@@ -1,16 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import PrimeReact from 'primereact/api';
+
 import { useEventListener, useUnmountEffect } from 'primereact/hooks';
 import { classNames } from 'primereact/utils';
 import React, { useContext, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AppTopbarRef, ChildContainerProps, LayoutState } from '../types/types';
 import AppConfig from './AppConfig';
 import AppFooter from './AppFooter';
 import AppSidebar from './AppSidebar';
 import AppTopbar from './AppTopbar';
 import { LayoutContext } from './context/layoutcontext';
-import { useLocation,useRoutes } from 'react-router-dom';
 
 const Layout = ({ children }: ChildContainerProps) => {
   const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
@@ -25,9 +24,7 @@ const Layout = ({ children }: ChildContainerProps) => {
         sidebarRef.current?.isSameNode(event.target as Node) ||
         sidebarRef.current?.contains(event.target as Node) ||
         topbarRef.current?.menubutton?.isSameNode(event.target as Node) ||
-        topbarRef.current?.menubutton?.contains(event.target as Node)||
-        topbarRef.current?.speedButton?.isSameNode(event.target as Node) ||
-        topbarRef.current?.speedButton?.contains(event.target as Node)
+        topbarRef.current?.menubutton?.contains(event.target as Node)
       );
 
       if (isOutsideClicked) {
@@ -35,6 +32,11 @@ const Layout = ({ children }: ChildContainerProps) => {
       }
     },
   });
+
+  useEffect(() => {
+    hideMenu();
+    hideProfileMenu();
+  }, [location]);
 
   const [bindProfileMenuOutsideClickListener, unbindProfileMenuOutsideClickListener] = useEventListener({
     type: 'click',
@@ -51,10 +53,7 @@ const Layout = ({ children }: ChildContainerProps) => {
       }
     },
   });
-  useEffect(() => {
-    hideMenu();
-    // Send request to your server to increment page view count
-  }, [location]);
+
   const hideMenu = () => {
     setLayoutState((prevLayoutState: LayoutState) => ({
       ...prevLayoutState,
@@ -67,7 +66,10 @@ const Layout = ({ children }: ChildContainerProps) => {
   };
 
   const hideProfileMenu = () => {
-    setLayoutState((prevLayoutState: LayoutState) => ({ ...prevLayoutState, profileSidebarVisible: false }));
+    setLayoutState((prevLayoutState: LayoutState) => ({
+      ...prevLayoutState,
+      profileSidebarVisible: false,
+    }));
     unbindProfileMenuOutsideClickListener();
   };
 
@@ -103,15 +105,6 @@ const Layout = ({ children }: ChildContainerProps) => {
       bindProfileMenuOutsideClickListener();
     }
   }, [layoutState.profileSidebarVisible]);
-
-  useEffect(() => {
-    console.log(children);
-    // router.events.on('routeChangeComplete', () => {
-    //     hideMenu();
-    //     hideProfileMenu();
-    // });
-  }, []);
-
   PrimeReact.ripple = true;
 
   useUnmountEffect(() => {

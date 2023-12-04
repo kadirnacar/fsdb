@@ -3,19 +3,18 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 import 'primeflex/primeflex.css';
-import 'primeicons/primeicons.css';
 import 'primeicons/fonts/primeicons.woff2';
+import 'primeicons/primeicons.css';
 // import 'primeicons/fonts/primeicons.eot';
 // import 'primeicons/fonts/primeicons.woff';
 // import 'primeicons/fonts/primeicons.svg';
 // import 'primeicons/fonts/primeicons.ttf';
 import 'primereact/resources/primereact.css';
 import { createRoot } from 'react-dom/client';
-import { HashRouter, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { environment } from '../environments/environment';
-import '../styles/layout/layout.scss';
 import App from './container/App';
-import { DataService } from './services/DataService';
+import './styles/layout/layout.scss';
 
 if (environment.production) {
   disableReactDevTools();
@@ -26,21 +25,14 @@ library.add(fas);
 dom.watch();
 
 const fetchData = async () => {
-  const data: any = await DataService.getItem<any>('Layout');
-  let response: any = {};
-  if (!data.value || Object.keys(data.value).length == 0) {
-    response = {
-      ripple: false,
-      inputStyle: 'outlined',
-      menuMode: 'static',
-      colorScheme: 'white',
-      theme: 'bootstrap4-light-blue',
-      scale: 12,
-    };
-    // await DataService.create<any>('Layout', response);
-  } else {
-    response = data.value;
-  }
+  let response: any = {
+    ripple: false,
+    inputStyle: 'outlined',
+    menuMode: 'static',
+    colorScheme: 'white',
+    theme: 'bootstrap4-light-blue',
+    scale: 12,
+  };
 
   const styl = document.getElementById('theme-css');
   if (styl) {
@@ -53,9 +45,9 @@ const fetchData = async () => {
   const root = createRoot(container!);
 
   root.render(
-    <HashRouter>
+    <BrowserRouter>
       <App layoutConfig={response} />
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 fetchData().catch(console.error);

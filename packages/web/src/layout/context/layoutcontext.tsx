@@ -1,17 +1,18 @@
-
 import { createContext, useState } from 'react';
 import { ChildContainerProps, LayoutConfig, LayoutContextProps, LayoutState } from '../../types/types';
 export const LayoutContext = createContext({} as LayoutContextProps);
 
-export const LayoutProvider = ({ children }: ChildContainerProps) => {
-  const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>({
-    ripple: false,
-    inputStyle: 'outlined',
-    menuMode: 'static',
-    colorScheme: 'light',
-    theme: 'lara-light-indigo',
-    scale: 14,
-  });
+export const LayoutProvider = ({ children, initialLayout }: ChildContainerProps) => {
+  const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>(
+    initialLayout || {
+      ripple: false,
+      inputStyle: 'outlined',
+      menuMode: 'static',
+      colorScheme: 'light',
+      theme: 'lara-light-indigo',
+      scale: 14,
+    }
+  );
 
   const [layoutState, setLayoutState] = useState<LayoutState>({
     staticMenuDesktopInactive: false,

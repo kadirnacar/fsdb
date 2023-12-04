@@ -143,7 +143,7 @@ const ListDemo = () => {
 
   const itemTemplate = (data: any, layout: 'grid' | 'list' | (string & Record<string, unknown>)) => {
     if (!data) {
-      return;
+      return null;
     }
 
     if (layout === 'list') {
@@ -151,6 +151,7 @@ const ListDemo = () => {
     } else if (layout === 'grid') {
       return dataviewGridItem(data);
     }
+    return null;
   };
 
   return (

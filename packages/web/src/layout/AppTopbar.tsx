@@ -26,7 +26,7 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
     <div className="layout-topbar">
       <Link to="/" className="layout-topbar-logo">
         <img
-          src={`/layout/images/logo-${
+          src={`./layout/images/logo-${
             layoutConfig.colorScheme !== 'light' ? 'white' : 'dark'
           }.png`}
           height={'35px'}

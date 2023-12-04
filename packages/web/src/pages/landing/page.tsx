@@ -24,7 +24,7 @@ const LandingPage = () => {
         <div className="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static">
           <Link to="/" className="flex align-items-center">
             <img
-              src={`/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
+              src={`./layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
               alt="Sakai Logo"
               height="50"
               className="mr-0 lg:mr-2"
@@ -572,7 +572,7 @@ const LandingPage = () => {
                 className="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer"
               >
                 <img
-                  src={`/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
+                  src={`./layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
                   alt="footer sections"
                   width="50"
                   height="50"

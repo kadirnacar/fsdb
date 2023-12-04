@@ -7,7 +7,7 @@
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "development",
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/packages/server/web"
       },
@@ -16,7 +16,8 @@
           "mode": "development"
         },
         "production": {
-          "mode": "production"
+          "mode": "production",
+          "minify": true
         }
       }
     },
@@ -24,8 +25,7 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "web:build",
-        "outputPath": "dist/packages/server/web"
+        "buildTarget": "web:build"
       },
       "configurations": {
         "development": {

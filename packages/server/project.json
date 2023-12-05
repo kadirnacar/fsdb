@@ -39,7 +39,10 @@
     },
     "obfuscate": {
       "executor": "nx:run-commands",
-      "options": { "cwd": "dist/packages/server", "command": "npx rimraf ../output && npx javascript-obfuscator ./ --output ../output && npx copyfiles ./*.json ../output/" }
+      "options": {
+        "cwd": "dist/packages/server",
+        "command": "npx rimraf ../output && npx javascript-obfuscator ./ --output ../output && npx copyfiles ./*.json ../output/"
+      }
     },
     "serve": {
       "executor": "@nx/js:node",

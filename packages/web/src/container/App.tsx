@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes, useRoutes } from 'react-router-dom';
 import { LayoutProvider } from '../layout/context/layoutcontext';
 import Layout from '../layout/layout';
 import Crud from '../pages/crud/page';
@@ -21,8 +21,134 @@ import OverlayDemo from '../pages/uikit/overlay/page';
 import PanelDemo from '../pages/uikit/panel/page';
 import TableDemo from '../pages/uikit/table/page';
 import TreeDemo from '../pages/uikit/tree/page';
+import AccessDeniedPage from '../pages/auth/access/page';
+import LoginPage from '../pages/auth/login/page';
+import ErrorPage from '../pages/auth/error/page';
+
+const AppLayout = (layoutConfig) => (
+  <LayoutProvider initialLayout={{ ...layoutConfig }}>
+    <Layout>
+      <Outlet />
+    </Layout>
+  </LayoutProvider>
+);
+
+const WithoutLayout = (layoutConfig) => (
+  <LayoutProvider initialLayout={{ ...layoutConfig }}>
+    <Outlet />
+  </LayoutProvider>
+);
+
+const routesConfig = (layoutConfig) => {
+  return [
+    {
+      element: <WithoutLayout layoutConfig={layoutConfig} />,
+      children: [
+        {
+          path: '/landing',
+          element: <LandingPage />,
+        },
+        {
+          path: '/notfound',
+          element: <NotFoundPage />,
+        },
+        {
+          path: '/access',
+          element: <AccessDeniedPage />,
+        },
+        {
+          path: '/login',
+          element: <LoginPage />,
+        },
+        {
+          path: '/error',
+          element: <ErrorPage />,
+        },
+      ],
+    },
+    {
+      element: <AppLayout layoutConfig={layoutConfig} />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/empty',
+          element: <Empty />,
+        },
+        {
+          path: '/uikit/formlayout',
+          element: <FormLayoutDemo />,
+        },
+        {
+          path: '/uikit/input',
+          element: <InputDemo />,
+        },
+        {
+          path: '/uikit/floatlabel',
+          element: <FloatLabelDemo />,
+        },
+        {
+          path: '/uikit/invalidstate',
+          element: <InvalidStateDemo />,
+        },
+        {
+          path: '/uikit/button',
+          element: <ButtonDemo />,
+        },
+        {
+          path: '/uikit/table',
+          element: <TableDemo />,
+        },
+        {
+          path: '/uikit/list',
+          element: <ListDemo />,
+        },
+        {
+          path: '/uikit/tree',
+          element: <TreeDemo />,
+        },
+        {
+          path: '/uikit/panel',
+          element: <PanelDemo />,
+        },
+        {
+          path: '/uikit/overlay',
+          element: <OverlayDemo />,
+        },
+        {
+          path: '/uikit/media',
+          element: <MediaDemo />,
+        },
+        {
+          path: '/uikit/menu',
+          element: <MenuDemo />,
+        },
+        {
+          path: '/uikit/message',
+          element: <MessagesDemo />,
+        },
+        {
+          path: '/uikit/file',
+          element: <FileDemo />,
+        },
+        {
+          path: '/uikit/misc',
+          element: <MiscDemo />,
+        },
+        {
+          path: '/crud',
+          element: <Crud />,
+        },
+      ],
+    },
+  ];
+};
 
 function App({ layoutConfig }) {
+  const routes = useRoutes(routesConfig(layoutConfig));
+  return routes;
   return (
     <LayoutProvider initialLayout={layoutConfig}>
       <Layout>
@@ -44,9 +170,9 @@ function App({ layoutConfig }) {
           <Route path="/uikit/message" element={<MessagesDemo />} />
           <Route path="/uikit/file" element={<FileDemo />} />
           <Route path="/uikit/misc" element={<MiscDemo />} />
-          <Route path="/uikit/landing" element={<LandingPage />} />
-          <Route path="/uikit/crud" element={<Crud />} />
-          <Route path="/uikit/notfound" element={<NotFoundPage />} />
+          <Route path="/crud" element={<Crud />} />
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/notfound" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </LayoutProvider>

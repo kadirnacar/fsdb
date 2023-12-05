@@ -15,6 +15,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import App from './container/App';
 import './styles/layout/layout.scss';
+import { PrimeReactProvider } from 'primereact/api';
 
 if (environment.production) {
   disableReactDevTools();
@@ -31,7 +32,7 @@ const fetchData = async () => {
     menuMode: 'static',
     colorScheme: 'white',
     theme: 'bootstrap4-light-blue',
-    scale: 12,
+    scale: 14,
   };
 
   const styl = document.getElementById('theme-css');
@@ -46,7 +47,9 @@ const fetchData = async () => {
 
   root.render(
     <BrowserRouter>
-      <App layoutConfig={response} />
+      <PrimeReactProvider>
+        <App layoutConfig={response} />
+      </PrimeReactProvider>
     </BrowserRouter>
   );
 };

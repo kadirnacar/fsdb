@@ -22,7 +22,7 @@ const LoginPage = () => {
     <div className={containerClassName}>
       <div className="flex flex-column align-items-center justify-content-center">
         <img
-          src={`/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.svg`}
+          src={`/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.png`}
           alt="Sakai logo"
           className="mb-5 w-6rem flex-shrink-0"
         />

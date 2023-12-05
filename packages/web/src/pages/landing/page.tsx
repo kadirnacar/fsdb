@@ -571,7 +571,7 @@ const LandingPage = () => {
                 className="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer"
               >
                 <img
-                  src={`/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
+                  src={`/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.png`}
                   alt="footer sections"
                   width="50"
                   height="50"

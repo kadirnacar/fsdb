@@ -7,7 +7,6 @@ import { StyleClass } from 'primereact/styleclass';
 import { classNames } from 'primereact/utils';
 import { Link } from 'react-router-dom';
 import { LayoutContext } from '../../layout/context/layoutcontext';
-import { NodeRef } from '../../types/layout';
 
 const LandingPage = () => {
   const [isHidden, setIsHidden] = useState(false);
@@ -24,14 +23,14 @@ const LandingPage = () => {
         <div className="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static">
           <Link to="/" className="flex align-items-center">
             <img
-              src={`./layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
+              src={`/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
               alt="Sakai Logo"
               height="50"
               className="mr-0 lg:mr-2"
             />
             <span className="text-900 font-medium text-2xl line-height-3 mr-8">SAKAI</span>
           </Link>
-          <StyleClass nodeRef={menuRef as NodeRef} selector="@next" enterClassName="hidden" leaveToClassName="hidden" hideOnOutsideClick>
+          <StyleClass nodeRef={menuRef as any} selector="@next" enterClassName="hidden" leaveToClassName="hidden" hideOnOutsideClick>
             <i ref={menuRef} className="pi pi-bars text-4xl cursor-pointer block lg:hidden text-700"></i>
           </StyleClass>
           <div
@@ -572,7 +571,7 @@ const LandingPage = () => {
                 className="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer"
               >
                 <img
-                  src={`./layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
+                  src={`/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`}
                   alt="footer sections"
                   width="50"
                   height="50"

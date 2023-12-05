@@ -8,6 +8,7 @@
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
+
       "options": {
         "platform": "node",
         "outputPath": "dist/packages/server",
@@ -35,6 +36,10 @@
           }
         }
       }
+    },
+    "obfuscate": {
+      "executor": "nx:run-commands",
+      "options": { "cwd": "dist/packages/server", "command": "npx rimraf ../output && npx javascript-obfuscator ./ --output ../output && npx copyfiles ./*.json ../output/" }
     },
     "serve": {
       "executor": "@nx/js:node",

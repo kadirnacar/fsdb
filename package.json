@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npx nx run-many --targets=serve --all",
-    "build": "npx nx run-many --targets=build --all --skip-nx-cache",
+    "build": "npx nx run-many --targets=build,obfuscate --all --skip-nx-cache --parallel=false",
     "web": "nx run web:serve"
   },
   "private": true,

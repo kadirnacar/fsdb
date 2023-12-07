@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "@fastify/autoload": "~5.8.0",
+    "@fastify/mongodb": "^8.0.0",
     "@fastify/sensible": "~5.5.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
